@@ -1,5 +1,5 @@
 def read_fasta(file_name):
-    with open(input_file) as f:
+    with open(file_name) as f:
         lines = f.readlines()
     lines = [i.strip() for i in lines]
     fasta = {}
@@ -17,3 +17,13 @@ def read_fasta(file_name):
     fasta[seq_name] = seq
     
     return fasta
+
+def read_RNA_Codon_file(file_name='Data/RNA_Codon_Table.txt'):
+    with open(file_name) as f:
+        lines = f.readlines()
+    RNA_codon = {}
+    lines = [i.strip().split() for i in lines]
+    for l in lines:
+        for i in range(0, len(l), 2):
+            RNA_codon[l[i]] = l[i+1]
+    return RNA_codon
