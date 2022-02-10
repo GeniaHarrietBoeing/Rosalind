@@ -38,4 +38,3 @@ for s in superseqs:
         min_length = len(s)
 
 print(min_seq)
-print(len(superseqs))
