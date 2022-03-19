@@ -96,28 +96,36 @@ def is_2sat(lst_scc, nr_nodes):
                 return 0
     return 1
 
+
 def find_2sat(lst_scc, A):
     scc_dag = collapsed_scc(A, lst_scc)
     ts = topological_sort(scc_dag)
-    assigned = [False] * len(A)
-    assigned[len(A)//2] = True
-    valid_assignment = []
-    while(sum(assigned) != len(assigned)):
-        for i in range(0, len(ts)):
-            scc = lst_scc[ts[i]]
-            for n in scc:
-                if not assigned[n]: 
-                    assigned[n] = True
-                    original_node = n - nr_nodes
-                    negative_node = -1 * original_node
-                    offset_negative_node = negative_node + nr_nodes
-                    assigned[offset_negative_node] = True
-                    valid_assignment.append(n)
-    sorted_valid_assignment = [0] * (len(valid_assignment) + 1)
-    for i in range(0, len(valid_assignment)):
-        original_node = valid_assignment[i] - nr_nodes
-        sorted_valid_assignment[abs(original_node)] = original_node
-    return sorted_valid_assignment[1:]
+    valid_assignment = [0]*(len(A)//2 + 1)
+    comp_1 = 0
+    comp_2 = 0
+    ts_1 = 0
+    ts_2 = 0
+    for i in range(0, len(A)//2 + 1):
+        original_node = i - nr_nodes
+        negative_node = -1 * original_node
+        offset_negative_node = negative_node + nr_nodes
+        for scc in range(0, len(lst_scc)):
+            if i in lst_scc[scc]:
+                comp_1 = scc
+            if offset_negative_node in lst_scc[scc]:
+                comp_2 = scc
+
+        for k in range(0, len(ts)):
+            if ts[k] == comp_1:
+                ts_1 = ts[k]
+            if ts[k] == comp_2:
+                ts_2 = ts[k]
+
+        if ts_1 > ts_2:
+            valid_assignment[abs(original_node)] = original_node
+        else:
+            valid_assignment[abs(original_node)] = negative_node
+    return valid_assignment[1:]
 
 def collapsed_scc(A, lst_scc):
     scc_dag = [[0]*(len(lst_scc)) for i in range(0, len(lst_scc))]
@@ -153,7 +161,5 @@ for g in graphs:
     else:
         assignment = find_2sat(lst_scc, A_r)
         result.append([1] + assignment)
-        print('does assignment work?    ', check_assignment(g, assignment))
 for i in result:
-    #print(' '.join([str(j) for j in i]))
-    x = 1
+    print(' '.join([str(j) for j in i]))
