@@ -26,4 +26,4 @@ def merge_sort(a, b, c = []):
     return c
 
 result = merge_sort(a, b)
-print(' '.join([str(i) for i in result]))
+#print(' '.join([str(i) for i in result]))

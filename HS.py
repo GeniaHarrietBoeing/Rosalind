@@ -38,4 +38,4 @@ class bin_max_heap:
 
 heap = bin_max_heap(a)
 heap.heap_sort()
-print(' '.join([str(i) for i in heap.bin_max_heap]))
+#print(' '.join([str(i) for i in heap.bin_max_heap]))

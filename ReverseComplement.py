@@ -1,4 +1,4 @@
-input_file = 'Data/rosalind_revc.txt'
+input_file = 'Data/rosalind_ba1c.txt'
 with open(input_file) as f:
     data = f.read()
 data = data.strip()

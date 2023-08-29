@@ -37,6 +37,8 @@ def naive_check_general_sink(A):
             return i
     return -1
 
+
+
 result = []
 for g in graphs:
     A = adjacency_matrix(g)

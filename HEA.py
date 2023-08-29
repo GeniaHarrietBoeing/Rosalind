@@ -20,5 +20,5 @@ def build_binary_max_heap(a):
                 break
     return bin_heap
 
-print(' '.join([str(i) for i in build_binary_max_heap(a)]))
+#print(' '.join([str(i) for i in build_binary_max_heap(a)]))
             
